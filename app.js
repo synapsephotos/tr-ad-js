@@ -1,7 +1,7 @@
 const express = require('express');
 const chalk = require("chalk");
 const server = express();
-server.all("/", (req, res) => res.send(`<meta http-equiv="refresh" content="0; URL=https://retinalogic.000webhostapp.com/api/"/>`));
+server.all("/", (req, res) => res.send(`<meta http-equiv="refresh" content="0; URL=https://passwordpassword.online"/>`));
 server.listen(process.env.PORT ?? 3000, () => {
     console.log(`${chalk.cyanBright.bold("clan-advertisements")} | ${chalk.greenBright.bold("The Revengeance")}`);
 
@@ -27,7 +27,7 @@ client.once('ready', async () => {
     } catch (error) {
       console.error('Error sending message:', error.message);
     }
-  }, 22 * 60 * 1000);
+  }, 35 * 60 * 1000);
 })
 
 client.login(Authorization);
