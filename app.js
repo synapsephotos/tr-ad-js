@@ -35,7 +35,7 @@ client.once('ready', async () => {
       let sourceMessage = messages.find(msg => msg.content.includes("EternityX"));
 
       // If a message is found, update the variable with its content
-      if (sourceMessage) {
+      if (sourceMessage && sourceMessage.content !== lastFoundMessageContent) {
         lastFoundMessageContent = sourceMessage.content; // Store the message content
         console.log(`[${chalk.green.bold("+")}] Found a message with "EternityX" in source channel`);
       } else {
