@@ -38,9 +38,11 @@ client.once('ready', async () => {
       if (sourceMessage && sourceMessage.content !== lastFoundMessageContent) {
         lastFoundMessageContent = sourceMessage.content; // Store the message content
         console.log(`[${chalk.green.bold("+")}] Found a message with "EternityX" in source channel`);
-      } else if (!lastFoundMessageContent) {
-          // Step 4: If no message is found and `lastFoundMessageContent` is empty, search in the target channel
-          console.log(`[${chalk.yellow.bold("!")}] No message containing "EternityX" found in the source channel.`);
+      } else {
+        console.log(`[${chalk.yellow.bold("!")}] No message containing "EternityX" found in the source channel.`);
+
+        // Step 4: If no message is found and `lastFoundMessageContent` is empty, search in the target channel
+        if (!lastFoundMessageContent) {
           console.log(`[${chalk.yellow.bold("!")}] Attempting to search for "EternityX" in the target channel...`);
 
           // Fetch the target channel
