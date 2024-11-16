@@ -11,7 +11,7 @@ server.listen(process.env.PORT ?? 3000, () => {
 const Authorization = process.env.Authorization;
 
 const CHANNEL_ID = "1245731705113940089"
-const MESSAGE = "LF people that can upgrade 10 times a day and afk (we need one more level for quantum) only one spot available\n> **DM <@1016542844170817568> to apply**"
+const MESSAGE = "👿 The Revengeance | NA Clan 🇺🇸\nCD 🔓 QA 🔓 7 - 7 - 6 - 7 / 13/50 spots\nLF AFKers / GW hosts / Comp / Big bucks\n> DM @joon._._#0000"
 
 const Discord = require('discord.js-selfbot-v13');
 const client = new Discord.Client({checkUpdate: false});
