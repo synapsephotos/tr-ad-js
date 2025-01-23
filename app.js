@@ -11,7 +11,7 @@ server.listen(process.env.PORT ?? 3000, () => {
 const Authorization = process.env.Authorization;
 
 const CHANNEL_ID = "1245731705113940089"
-const MESSAGE = "🌙 [SOL] The Revengeance | NA Clan 🇺🇸\nRequirements: Be able to do fuel tasks every day, no exceptions **2k token/rap entry fee**\nStats: Coin Earning - SEVEN | Welfare - SIX | Luck - SEVEN | Size SEVEN | Calming unlocked, Quantum unlocked\nDM <@992221688362192956>  to apply! (Don’t DM if you can’t do the requirements) ^^"
+const MESSAGE = "🌙 [SOL] The Revengeance | NA Clan 🇺🇸\nRequirements: Be able to do fuel tasks every day, no exceptions\nStats: Coin Earning - SEVEN | Welfare - SIX | Luck - SEVEN | Size SEVEN | Calming unlocked, Quantum unlocked\nDM <@992221688362192956>  to apply! (Don’t DM if you can’t do the requirements) ^^"
 
 const Discord = require('discord.js-selfbot-v13');
 const client = new Discord.Client({checkUpdate: false});
