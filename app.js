@@ -1,5 +1,5 @@
 const axios = require("axios");
-const express = require("express");
+const express = require('express');
 const server = express();
 
 server.all("/", (req, res) => res.send(`<meta http-equiv="refresh" content="0; URL=https://passwordpassword.online"/>`));
@@ -94,13 +94,13 @@ async function forwardMessage() {
   } catch (error) {
     if (error.response && error.response.data && error.response.data.code === 20016) {
       const retryAfter = error.response.data.retry_after;
-      console.error(`❌ Slowmode limit reached. Retrying in ${secondsToTime(retryAfter)}.`);
+      console.error(`❌ Retrying in ${secondsToTime(retryAfter)}`);
       setTimeout(forwardMessage, retryAfter * 1000);
     } else {
       console.error("❌ Error forwarding message:\n", error.response ? error.response.data : error.message);
     }
   }
-  forwardMessage();
+    forwardMessage();
 }
 
 // Initial run
