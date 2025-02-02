@@ -9,7 +9,7 @@ server.listen(process.env.PORT ?? 3000, () => {
 });
 
 // Load bot token from environment variables
-const Authorization = process.env.AUTHORIZATION;
+const Authorization = process.env.Authorization;
 
 // Define your variables
 const SOURCE_CHANNEL_ID = "1333272333359517818";
