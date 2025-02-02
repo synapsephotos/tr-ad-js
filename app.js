@@ -1,33 +1,41 @@
-const express = require('express');
-const chalk = require("chalk");
-const server = express();
+const axios = require("axios");
 
-server.all("/", (req, res) => res.send(`<meta http-equiv="refresh" content="0; URL=https://passwordpassword.online"/>`));
-server.listen(process.env.PORT ?? 3000, () => {
-    console.log(`${chalk.magentaBright.bold("clan-advertisements")} | ${chalk.redBright.bold("The Revengeance")}`);
-    console.log(`\n[${chalk.green.bold("+")}] The webserver is ready.\n`);
-});
+// Load bot token from environment variables
+const Authorization = process.env.AUTHORIZATION;
 
-const Authorization = process.env.Authorization;
+// Define your variables
+const SOURCE_CHANNEL_ID = "1333272333359517818";
+const TARGET_CHANNEL_ID = "1245731705113940089";
+const SOURCE_MESSAGE_ID = "1335446840392548422";
+const DISCORD_API = "https://discord.com/api/v10";
 
-const CHANNEL_ID = "1245731705113940089"
-const MESSAGE = "🌙 [SOL] The Revengeance | NA Clan 🇺🇸\nRequirements: Be able to do fuel tasks every day, no exceptions\nStats: Coin Earning - SEVEN | Welfare - SIX | Luck - SEVEN | Size SEVEN | Calming unlocked, Quantum unlocked\nDM <@992221688362192956>  to apply! (Don’t DM if you can’t do the requirements) ^^"
+// Set up headers
+const headers = {
+  Authorization: Authorization, // Prefix "Bot " is required
+  "Content-Type": "application/json",
+};
 
-const Discord = require('discord.js-selfbot-v13');
-const client = new Discord.Client({checkUpdate: false});
+// Payload for forwarding the message
+const payload = {
+  message_reference: {
+    type: 1, // FORWARD type
+    message_id: SOURCE_MESSAGE_ID,
+    channel_id: SOURCE_CHANNEL_ID,
+  },
+};
 
-client.once('ready', async () => {
-  console.log(`${client.user.username}#${client.user.discriminator} (${client.user.id})!`);
+// Function to forward the message
+async function forwardMessage() {
+  try {
+    const response = await axios.post(`${DISCORD_API}/channels/${TARGET_CHANNEL_ID}/messages`, payload, { headers });
+    console.log("✅ Message forwarded successfully:", response.data);
+  } catch (error) {
+    console.error("❌ Error forwarding message:", error.response ? error.response.data : error.message);
+  }
+}
 
-  setInterval(async () =>{
-    try {
-      const channel = await client.channels.fetch(CHANNEL_ID);
-      await channel.send(MESSAGE);
-      console.log(`[${chalk.green.bold("+")}] Message sent successfully`);
-    } catch (error) {
-      console.error('Error sending message:', error.message);
-    }
-  }, 35 * 60 * 1000);
-})
+// Run the function every 35 minutes
+setInterval(forwardMessage, 35 * 60 * 1000);
 
-client.login(Authorization);
+// Initial run (optional: remove if you don't want an immediate send)
+forwardMessage();
