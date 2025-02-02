@@ -54,6 +54,7 @@ async function forwardMessage() {
 
       // Retry after the retryAfter time in seconds
       setTimeout(forwardMessage, retryAfter * 1000); // Convert to milliseconds for setTimeout
+      return;
     } else {
       console.error("❌ Error forwarding message:", error.response ? error.response.data : error.message);
     }
