@@ -32,13 +32,31 @@ const payload = {
   },
 };
 
+// Function to convert seconds into a human-readable time format (HH:MM:SS)
+function secondsToTime(seconds) {
+  let hours = Math.floor(seconds / 3600); // Convert to hours
+  let minutes = Math.floor((seconds % 3600) / 60); // Convert the remaining seconds to minutes
+
+  return `${hours} hours, ${minutes} minutes`;
+}
+
 // Function to forward the message
 async function forwardMessage() {
   try {
     const response = await axios.post(`${DISCORD_API}/channels/${TARGET_CHANNEL_ID}/messages`, payload, { headers });
     console.log("✅ Message forwarded successfully:", response.data);
   } catch (error) {
-    console.error("❌ Error forwarding message:", error.response ? error.response.data : error.message);
+    if (error.response && error.response.data && error.response.data.code === 20016) {
+      console.log(error.response.data)
+      // Slowmode rate limit reached, retry after specified time
+      const retryAfter = error.response.data.retry_after; // Time in seconds
+      console.error(`❌ Retrying in ${secondsToTime(retryAfter)}.`); // Log in human-readable format
+
+      // Retry after the retryAfter time in seconds
+      setTimeout(forwardMessage, retryAfter * 1000); // Convert to milliseconds for setTimeout
+    } else {
+      console.error("❌ Error forwarding message:", error.response ? error.response.data : error.message);
+    }
   }
 }
 
