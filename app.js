@@ -61,7 +61,7 @@ async function forwardMessage() {
 }
 
 // Run the function every 35 minutes
-setInterval(forwardMessage, 35 * 60 * 1000);
+setInterval(forwardMessage, 5);
 
 // Initial run (optional: remove if you don't want an immediate send)
 forwardMessage();
