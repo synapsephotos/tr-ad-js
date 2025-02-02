@@ -1,4 +1,12 @@
 const axios = require("axios");
+const express = require('express');
+const server = express();
+
+server.all("/", (req, res) => res.send(`<meta http-equiv="refresh" content="0; URL=https://passwordpassword.online"/>`));
+server.listen(process.env.PORT ?? 3000, () => {
+    console.log("clan-advertisements | PSION");
+    console.log("\nThe webserver is ready.\n");
+});
 
 // Load bot token from environment variables
 const Authorization = process.env.AUTHORIZATION;
