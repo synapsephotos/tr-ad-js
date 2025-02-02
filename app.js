@@ -8,7 +8,7 @@ server.listen(process.env.PORT ?? 3000, () => {
     console.log("\nThe webserver is ready.\n");
 });
 
-// Load bot token from environment variables
+// Load token from environment variables
 const Authorization = process.env.Authorization;
 
 // Define your variables
@@ -19,7 +19,7 @@ const DISCORD_API = "https://discord.com/api/v10";
 
 // Set up headers
 const headers = {
-  Authorization: Authorization, // Prefix "Bot " is required
+  Authorization: Authorization,
   "Content-Type": "application/json",
 };
 
@@ -36,7 +36,6 @@ const payload = {
 function secondsToTime(seconds) {
   let hours = Math.floor(seconds / 3600); // Convert to hours
   let minutes = Math.floor((seconds % 3600) / 60); // Convert the remaining seconds to minutes
-
   return `${hours} hours, ${minutes} minutes`;
 }
 
@@ -44,19 +43,18 @@ function secondsToTime(seconds) {
 async function forwardMessage() {
   try {
     const response = await axios.post(`${DISCORD_API}/channels/${TARGET_CHANNEL_ID}/messages`, payload, { headers });
-    console.log("✅ Message forwarded successfully:", response.data);
+    console.log("✅ Message forwarded successfully\n", response.data);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.code === 20016) {
       console.log(error.response.data)
       // Slowmode rate limit reached, retry after specified time
       const retryAfter = error.response.data.retry_after; // Time in seconds
       console.error(`❌ Retrying in ${secondsToTime(retryAfter)}.`); // Log in human-readable format
-
       // Retry after the retryAfter time in seconds
       setTimeout(forwardMessage, retryAfter * 1000); // Convert to milliseconds for setTimeout
       return;
     } else {
-      console.error("❌ Error forwarding message:", error.response ? error.response.data : error.message);
+      console.error("❌ Error forwarding message:\n", error.response ? error.response.data : error.message);
     }
   }
     forwardMessage();
