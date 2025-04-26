@@ -14,7 +14,7 @@ const Authorization = process.env.Authorization;
 // Define your variables
 const SOURCE_CHANNEL_ID = "1333272333359517818";
 const TARGET_CHANNEL_ID = "1245731705113940089";
-const SOURCE_MESSAGE_ID = "1245731705113940089";
+const SOURCE_MESSAGE_ID = "1365769281085767700";
 const DISCORD_API = "https://discord.com/api/v10";
 
 // Set up headers
