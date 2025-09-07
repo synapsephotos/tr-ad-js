@@ -12,9 +12,9 @@ server.listen(process.env.PORT ?? 3000, () => {
 const Authorization = process.env.Authorization;
 
 // Define your variables
-const SOURCE_CHANNEL_ID = "1333272333359517818";
+const SOURCE_CHANNEL_ID = "1414010471501267014";
 const TARGET_CHANNEL_ID = "1245731705113940089";
-const SOURCE_MESSAGE_ID = "1372909551480999987";
+const SOURCE_MESSAGE_ID = "1414034798913261568";
 const DISCORD_API = "https://discord.com/api/v10";
 
 // Set up headers
